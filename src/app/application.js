@@ -1,34 +1,40 @@
 import Koa from 'koa';
-
 const app = new Koa();
+import views from 'koa-views';
+import {logger, logMiddlerware} from './logging';
+import path from 'path';
+import settings from '../configs/settings';
+import bodyParser from 'koa-bodyparser';
+import routes from '../routes';
 
-let  test = async (e)=>{
-    return 3;
-}
-// x-response-time
-app.use(async (ctx, next) => {
-    var start = new Date;
-    test('dd').then(function(data){
-        console.log(data);
-    });
-    console.log('**********');
-    await next();
-    const ms = new Date - start;
-    ctx.set('X-Response-Time', ms + 'ms');
+app.env = process.env.NODE_ENV || settings.env.mode;
+app.proxy = true;
+app.port =  process.env.PORT || settings.env.port;
+app.bindip =  process.env.BINDIP || settings.env.bindIp;
+
+app.use(logMiddlerware);
+app.use(views(path.join(__dirname, '../views'), { map: { html: 'swig' }}));
+app.use(bodyParser({jsonLimit: '50mb', formLimit: '10mb', textLimit: '10mb', multipart:true, formidable:{keepExtensions: true, uploadDir: path.join(__dirname, '../../public/uploads')}}));
+
+//router
+routes(app);
+
+//test
+app.use(async ctx => {
+    await ctx.render('test', {message: 'this is a test message'});
+})
+//404
+app.use(async ctx => {
+    await ctx.render('404');
 });
 
-// logger
-app.use(async (ctx, next) => {
-    const start = new Date;
-    await next();
-    const ms = new Date - start;
-    console.log(`${ctx.method} ${ctx.url} - ${ms}`);
+//error
+app.on('error', err => {
+    console.error(err);
 });
 
-// response
-app.use( ctx => {
-    ctx.body = 'Hello World';
+app.listen(app.port, app.bindip, () => {
+    logger.info('Http server is binding on '+ app.bindip +' and listening on port ' + app.port + ' in ' + app.env );
 });
 
-app.listen(3000);
-console.log('Listening on http://localhost:3000');
+export {app}

@@ -1,17 +1,15 @@
-var log4js = require('log4js');
-var util = require('util');
+import log4js from 'log4js';
+import util from 'util';
 log4js.configure(__dirname + '/logging.json', { reloadSecs: 0 });
-var applogger = log4js.getLogger('app');
+var logger = log4js.getLogger('app');
 
-module.exports = {
-    logger: applogger,
-    generatorFunc: function *(next){
-        applogger.setLevel('DEBUG');
-        var DEFAULT = "%s %s -- %s %s HTTP/%s, %s %s";
-        var req = this.request, header = req.header, nodeReq = this.req;
-        var str = util.format(DEFAULT, new Date().toLocaleString(), req.ip, req.method, req.url, nodeReq.httpVersion, req.length || null, header['user-agent']);
+async function logMiddlerware(ctx, next){
+    logger.setLevel('DEBUG');
+    var DEFAULT = "%s %s -- %s %s HTTP/%s, %s %s";
+    var req = ctx.request, header = req.header, nodeReq = ctx.req;
+    var str = util.format(DEFAULT, new Date().toLocaleString(), req.ip, req.method, req.url, nodeReq.httpVersion, req.length || null, header['user-agent']);
 
-        applogger.debug(str);
-        yield next;
-    }
-};
+    logger.debug(str);
+    await next();
+}
+export {logger, logMiddlerware};

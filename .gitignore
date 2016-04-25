@@ -95,7 +95,8 @@ com_crashlytics_export_strings.xml
 
 ### Node ###
 # Logs
-logs
+logs/*
+!logs/README
 *.log
 
 # Runtime data
