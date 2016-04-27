@@ -5,6 +5,7 @@ import {logger, logMiddlerware} from './logging';
 import path from 'path';
 import settings from '../configs/settings';
 import bodyParser from 'koa-bodyparser';
+import session from '../middlewares/session';
 import routes from '../routes';
 
 app.env = process.env.NODE_ENV || settings.env.mode;
@@ -13,16 +14,22 @@ app.port =  process.env.PORT || settings.env.port;
 app.bindip =  process.env.BINDIP || settings.env.bindIp;
 
 app.use(logMiddlerware);
+app.use(session);
 app.use(views(path.join(__dirname, '../views'), { map: { html: 'swig' }}));
 app.use(bodyParser({jsonLimit: '50mb', formLimit: '10mb', textLimit: '10mb', multipart:true, formidable:{keepExtensions: true, uploadDir: path.join(__dirname, '../../public/uploads')}}));
 
 //router
 routes(app);
 
-//test
-app.use(async ctx => {
-    await ctx.render('test', {message: 'this is a test message'});
-})
+////test
+//app.use(async ctx => {
+//    //if(!ctx.session.name) {
+//        ctx.session.user = {name: 'allen', age: 23}
+//        await ctx.render('test', {message: 'this is a test message'});
+//    //}else{
+//    //    await ctx.render('test', {message: ctx.session.name});
+//    //}
+//})
 //404
 app.use(async ctx => {
     await ctx.render('404');

@@ -1,2 +1,2 @@
-var getRedisClient = require('./redis-client');
-module.exports = getRedisClient();
+import getRedisClient from './redis-client';
+export default getRedisClient();
