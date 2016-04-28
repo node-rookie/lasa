@@ -21,15 +21,6 @@ app.use(bodyParser({jsonLimit: '50mb', formLimit: '10mb', textLimit: '10mb', mul
 //router
 routes(app);
 
-////test
-//app.use(async ctx => {
-//    //if(!ctx.session.name) {
-//        ctx.session.user = {name: 'allen', age: 23}
-//        await ctx.render('test', {message: 'this is a test message'});
-//    //}else{
-//    //    await ctx.render('test', {message: ctx.session.name});
-//    //}
-//})
 //404
 app.use(async ctx => {
     await ctx.render('404');

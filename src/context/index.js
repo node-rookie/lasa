@@ -1,17 +1,15 @@
-var AllReady = require('../framework/allready');
-var context = require('./context');
+import AllReady from '../framework/allready';
+import context from './context';
 import redisMain from '../app/redis';
 import {logger} from '../app/logging';
-
-//var mongooseMain = require('../app/mongoose');
+import mongooseMain from '../app/mongoose';
 
 var ar = new AllReady();
 ar.add('redis', ar.redis(redisMain));
-//ar.add('mongoose', ar.mongoose(mongooseMain));
+ar.add('mongoose', ar.mongoose(mongooseMain));
 
-//context.logger = require('../app/logging').logger;
-//context.redis.main = redisMain;
-//context.mongoose.main = mongooseMain;
+context.redis.main = redisMain;
+context.mongoose.main = mongooseMain;
 //context.domainBuilder.main = require('../framework/model/DomainBuilder');
 ar.ready(function(){
     logger.info('already');
@@ -19,4 +17,4 @@ ar.ready(function(){
 });
 
 ar.context = context;
-module.exports = ar;
+export default ar;

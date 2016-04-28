@@ -1,13 +1,14 @@
-var settings = require('@private/base-settings').mongo;
-var mongoose = require('mongoose');
-var makeUrl = function(mongo){
-    var authPart = settings.username + ':' + settings.password + '@';
-    var auth = settings.username ? authPart : '';
+'use strict'
+import settings from '../configs/settings';
+import mongoose from 'mongoose';
+let makeUrl = (mongo) => {
+    var authPart = mongo.username + ':' + mongo.password + '@';
+    var auth = mongo.username ? authPart : '';
     return 'mongodb://' + auth + mongo.host + ':' + mongo.port + '/' + mongo.db;
 };
 
-var url = makeUrl(settings);
-var options = {};
+let url = makeUrl(settings.mongo);
+let options = {};
 
 mongoose.connect(url, options);
 
@@ -21,5 +22,5 @@ mongoose.connection.on('disconnected',function(){
     console.log('Mongoose disconnected to '+url);
 });
 
-module.exports = mongoose;
+export default mongoose;
 

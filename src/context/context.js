@@ -10,4 +10,4 @@ var context = {
     , services: {}
 };
 
-module.exports = context;
+export default context;
