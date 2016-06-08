@@ -10,7 +10,7 @@ ar.add('mongoose', ar.mongoose(mongooseMain));
 
 context.redis.main = redisMain;
 context.mongoose.main = mongooseMain;
-//context.domainBuilder.main = require('../framework/model/DomainBuilder');
+context.domainBuilder.main = require('../framework/model/DomainBuilder');
 ar.ready(function(){
     logger.info('already');
     //require('../modules');

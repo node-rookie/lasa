@@ -1,0 +1,22 @@
+<test1 if="{!hidden}">
+    <span>test1!</span>
+    <script>
+        console.error('test1')
+        console.log(this.hidden);
+        var self = this;
+
+        var router = this.router();
+        router.prefix('/app');
+        router.config('/test1/:id', {tag: this}, function (next) {
+            console.log('test1 router');
+            next();
+        })
+        this.on('update', function(){
+            console.log('update')
+            console.log(self.hidden);
+        })
+        this.on('mount', function(){
+            console.log('mounted');
+        })
+    </script>
+</test1>

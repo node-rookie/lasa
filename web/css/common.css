@@ -1,0 +1,10 @@
+body{
+    display: block;
+    margin: 0;
+    font-family: "Microsoft YaHei","Helvetica Neue",Helvetica,"Hiragino Sans GB",Arial,sans-serif;
+    background-color: #F4F4F4;
+    height: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}

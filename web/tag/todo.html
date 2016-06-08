@@ -1,0 +1,57 @@
+<todo>
+    <div>
+        <input type="text" name="todo"><button onclick="{addTodo}">add</button>
+    </div>
+    <div>
+        <ul>
+            <li each="{todo in todos}"  style="text-decoration: {todo.get('completed') ? 'line-through' : 'none'}" onclick="{clickTodo}">{ todo.get('text') }</li>
+        </ul>
+    </div>
+    <div>
+        <span onclick="{filter('SHOW_ALL')}">all</span>
+        <span onclick="{filter('SHOW_ACTIVE')}">active</span>
+        <span onclick="{filter('SHOW_COMPLETED')}">complete</span>
+    </div>
+    <script>
+        this.subscribe(function(state){
+            function getVisibleTodos(todos, filter){
+                switch (filter) {
+                    case 'SHOW_ALL':
+                        return todos
+                    case 'SHOW_COMPLETED':
+                        return todos.filter(function(t){return t.get('completed')})
+                    case 'SHOW_ACTIVE':
+                        return todos.filter(function(t){return !t.get('completed')})
+                }
+            }
+            function listToArray(todos){
+                var res = [];
+                console.log(todos)
+                todos.map(function(item){
+                    res.push(item);
+                })
+                return res;
+            }
+            return {
+                todos: listToArray(getVisibleTodos(state.todos, state.visibilityFilter)),
+                filter: state.visibilityFilter
+            }
+        })
+
+        this.addTodo = function(e){
+            this.dispatch(actions.addTodo(this.todo.value));
+        }
+
+        this.clickTodo = function(e){
+            this.dispatch(actions.toggleTodo(e.item.todo.get('id')));
+        }
+
+        this.filter = function(filter){
+            return function(e){
+                if(filter !== this.filter){
+                    this.dispatch(actions.setVisibilityFilter(filter))
+                }
+            }
+        }
+    </script>
+</todo>

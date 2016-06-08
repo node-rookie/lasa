@@ -28,11 +28,11 @@ app.use(async ctx => {
 
 //error
 app.on('error', err => {
-    console.error(err);
+    console.error(err.stack);
 });
 
 app.listen(app.port, app.bindip, () => {
     logger.info('Http server is binding on '+ app.bindip +' and listening on port ' + app.port + ' in ' + app.env );
 });
 
-export {app}
+export default app

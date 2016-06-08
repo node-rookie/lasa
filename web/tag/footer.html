@@ -1,0 +1,111 @@
+<footer>
+    <div class="bootom-tab-bar">
+        <div class="bar-times" onclick="location.href='#/timeline';return false;">
+            <i class="bar-times-icon"></i>
+            <span>动态</span>
+        </div>
+        <div class="bar-recommends" onclick="location.href='#/times';return false;">
+            <i class="bar-recommends-icon"></i>
+            <span>发现</span>
+        </div>
+        <div class="bar-make" onclick="location.href='#/post/make';return false;">
+            <i class="bar-make-icon"></i>
+        </div>
+        <div class="bar-trends" onclick="location.href='#/message/catalog';return false;">
+            <i class="bar-trends-icon"></i>
+            <span>消息</span>
+        </div>
+        <div class="bar-me" onclick="location.href='#/home';return false;">
+            <i class="bar-me-icon"></i>
+            <span>我的</span>
+        </div>
+    </div>
+    <style scoped>
+        .bootom-tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1A1A23;
+            z-index: 5;
+            height: 50px;
+            /*border-top: 0.5px solid rgba(0,0,0,0.1);*/
+        }
+        .bar-times {
+            float: left;
+            width: 6.4%;
+            text-align: center;
+            height: 100%;
+             -webkit-tap-highlight-color: rgba(0,0,0,0);
+            margin-right: 10.6%;
+            margin-left: 8%;
+        }
+        .bar-times-icon, .bar-trends-icon, .bar-recommends-icon, .bar-me-icon {
+            background-size: 24px 24px;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+        .bootom-tab-bar span {
+            font-size: 10px;
+            color: #9EA9BF;
+            display: block;
+            position: relative;
+            bottom: 3px;
+            height: 10px;
+        }
+        .bar-times-icon {
+            background-image: url('/web/images/timelinecopy.png');
+        }
+        .bar-recommends {
+            float: left;
+            width: 6.4%;
+            text-align: center;
+            height: 100%;
+             -webkit-tap-highlight-color: rgba(0,0,0,0);
+            margin-right: 8%;
+        }
+        .bar-recommends-icon {
+            background-image: url('/web/images/menufavcopy.png');
+        }
+        .bar-make {
+            float: left;
+            width: 21.3%;
+            text-align: center;
+            height: 100%;
+            background-color: #E8511A;
+        }
+        .bar-make-icon {
+            background-image: url('/web/images/menucamera@3x.png');
+            background-size: 28px 24px;
+            background-repeat: no-repeat;
+            width: 28px;
+            height: 24px;
+            display: inline-block;
+            margin-top: 12px;
+        }
+        .bar-trends {
+            float: left;
+            width: 6.4%;
+            text-align: center;
+            height: 100%;
+             -webkit-tap-highlight-color: rgba(0,0,0,0);
+            margin-left: 8%;
+        }
+        .bar-trends-icon {
+            background-image: url('/web/images/menuinfocopy.png');
+        }
+        .bar-me {
+            float: left;
+            width: 6.4%;
+            text-align: center;
+            height: 100%;
+             -webkit-tap-highlight-color: rgba(0,0,0,0);
+            margin-left: 10.6%;
+        }
+        .bar-me-icon {
+            background-image: url('/web/images/menumecopy.png');
+        }
+    </style>
+</footer>

@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var mongoose = require('mongoose');
-var logger = require('../../app/logging').logger;
+import {logger} from '../../app/logging';
 var Schema = mongoose.Schema;
 
 var BaseOptions = {

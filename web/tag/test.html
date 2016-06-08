@@ -1,0 +1,13 @@
+<test if="{!hidden}">
+    <span>test!</span>
+    <script>
+        console.error('test');
+        var self = this;
+        var router = this.router();
+        router.prefix('/app');
+        router.config('/test/:id', {tag: this}, function (next) {
+            console.log('test router');
+            next();
+        })
+    </script>
+</test>
